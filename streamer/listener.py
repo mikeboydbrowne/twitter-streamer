@@ -2,7 +2,7 @@ import sys
 import time
 import csv as csv_lib
 import tweepy
-import simplejson as json
+import json as simplejson
 
 import message_recognizers
 import utils

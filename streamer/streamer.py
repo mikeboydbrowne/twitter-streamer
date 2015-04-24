@@ -4,7 +4,7 @@ import logging
 import time
 import datetime
 import tweepy
-import simplejson as json
+import json as simplejson
 import utils
 
 import args

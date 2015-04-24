@@ -6,7 +6,7 @@
     TODO: Probably don't need classes.  Consider refactoring.
 """
 import tweepy
-import simplejson as json
+import json as simplejson
 
 
 class MessageRecognizer(object):
