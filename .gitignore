@@ -1,5 +1,6 @@
 .project
 .pydevproject
+streamer/api_keys.txt
 dev.ini
 *.cfg
 *.pyc

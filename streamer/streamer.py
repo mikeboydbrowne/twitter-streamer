@@ -4,7 +4,7 @@ import logging
 import time
 import datetime
 import tweepy
-import simplejson as json
+import json as simplejson
 import message_recognizers
 import utils
 
@@ -78,7 +78,7 @@ class StreamListener(tweepy.StreamListener):
     def parse_status_and_dispatch(self, stream_data):
         """Parse an incoming status and do something with it.
         """
-        status = tweepy.models.Status.parse(self.api, json.loads(stream_data))
+        status = tweepy.models.Status.parse(self.api, simplejson.loads(stream_data))
         if self.tweet_matchp(status):
             if self.opts.fields:
                 try:
@@ -96,8 +96,8 @@ class StreamListener(tweepy.StreamListener):
                             else:
                                 value = MISSING_FIELD_VALUE
                         # Try to encode the value as UTF-8, since Twitter says
-                        # that's how it's encoded. 
-                        # If it's not a string value, we eat the exception, 
+                        # that's how it's encoded.
+                        # If it's not a string value, we eat the exception,
                         # as value is already set.
                         try:
                             value = value.encode('utf8')
@@ -112,7 +112,7 @@ class StreamListener(tweepy.StreamListener):
                 print stream_data.strip()
 
         # Parse stream_data, compare tweet timestamp to current time as GMT;
-        # This bit does consume some time, so let's not do it unless absolutely 
+        # This bit does consume some time, so let's not do it unless absolutely
         # necessary.
         if self.opts.report_lag:
             now = datetime.datetime.utcnow()
@@ -176,13 +176,14 @@ class StreamListener(tweepy.StreamListener):
                 # Don't execute any other recognizers, and don't call base
                 # on_data() because we've already handled the message.
                 return
-        # Don't execute any of the base class on_data() handlers. 
+        # Don't execute any of the base class on_data() handlers.
         return
 
 
 def process_tweets(config, opts):
     """Set up and process incoming streams."""
     cfg = config.as_dict().get('twitter_api')
+
     auth = tweepy.OAuthHandler(cfg.get('consumer_key'), cfg.get('consumer_secret'))
     auth.set_access_token(cfg.get('access_token_key'), cfg.get('access_token_secret'))
 
