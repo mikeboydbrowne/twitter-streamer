@@ -182,7 +182,12 @@ class StreamListener(tweepy.StreamListener):
 
 def process_tweets(config, opts):
     """Set up and process incoming streams."""
-    cfg = config.as_dict().get('twitter_api')
+    # cfg = config.as_dict().get('twitter_api')
+    # assumes the commented line above doesn't work
+    cfg = {'consumer_key': 'consumer key here!',
+            'consumer_secret': 'consumer secret here',
+            'access_token_key':  'access token here',
+            'access_token_secret': 'access secret here'}
 
     auth = tweepy.OAuthHandler(cfg.get('consumer_key'), cfg.get('consumer_secret'))
     auth.set_access_token(cfg.get('access_token_key'), cfg.get('access_token_secret'))
